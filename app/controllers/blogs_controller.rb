@@ -6,7 +6,12 @@ class BlogsController < ApplicationController
   def new
     @blog = Blog.new
   end
-  
+
+  def create
+    Blog.create(blog_params)
+    redirect_to new_blog_path
+  end
+
   def show
     @blog = Blog.find(params[:id])
   end
@@ -19,4 +24,11 @@ class BlogsController < ApplicationController
       render :new
     end
   end
+
+  private
+
+  def blog_params
+    params.require(:blog).permit(:title, :content)
+  end
+
 end
