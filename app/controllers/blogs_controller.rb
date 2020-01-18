@@ -9,13 +9,22 @@ class BlogsController < ApplicationController
     @blog = Blog.new
   end
 
+  def edit
+  end
+
+  def update
+    if @blog.update(blog_params)
+      redirect_to blogs_path, notice: "ブログを編集しました！"
+    else
+      render :edit
+    end
+
   def create
     Blog.create(blog_params)
     redirect_to new_blog_path
   end
 
   def show
-    @blog = Blog.find(params[:id])
   end
 
   def create
